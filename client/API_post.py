@@ -9,7 +9,7 @@ import requests
 
 #set starting id and ending id
 start = 1
-end = 50
+end = 2
 
 # Loop over the JSON file
 i=start
@@ -24,11 +24,7 @@ while i <= end:
     
     print(myjson)
     
-    response = requests.post('http://localhost:80/invoiceitem', json=myjson)
-
-    # Use this for dedbugging
-    #print("Status code: ", response.status_code)
-    #print("Printing Entire Post Request")
+    response = requests.post('http://localhost:8000/flight', json=myjson)
     print(response.json())
 
     # increase i

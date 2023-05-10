@@ -6,7 +6,7 @@ consumer = KafkaConsumer()
 def kafka_python_consumer():
     
     # Consumer using the topic name and setting a group id
-    consumer = KafkaConsumer('ingestion-topic', group_id='mypythonconsumer',bootstrap_servers='localhost:9092',)
+    consumer = KafkaConsumer('streaming-topic', group_id='mypythonconsumer',bootstrap_servers='localhost:9092',)
     for msg in consumer:
       print(msg)
 

@@ -4,3 +4,5 @@
 delete a topic in kafka
 
 kafka-topics.sh --bootstrap-server kafka:9092 --delete --topic your_topic
+
+local consumer 
