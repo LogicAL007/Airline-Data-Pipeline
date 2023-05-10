@@ -70,7 +70,7 @@ def produce_kafka_string(item_dict):
         producer = KafkaProducer(bootstrap_servers='localhost:9093',acks=1)
         
         # Write the string as bytes because Kafka needs it this way
-        producer.send('my-topic', bytes(item_dict, 'utf-8'))
+        producer.send('streaming-topic', bytes(item_dict, 'utf-8'))
         producer.flush()
     
 def success(metadata):
