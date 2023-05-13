@@ -12,6 +12,6 @@ dfjson = df["json"]
 #dfjson = pd.read_json('\n'.join(json_lines), lines=True)
 
 # Save the DataFrame to a text file
-np.savetxt('./output2.txt', dfjson.values, fmt='%s')
+np.savetxt('output2.txt', dfjson.values, fmt='%s')
 
 

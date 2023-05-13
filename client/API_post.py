@@ -24,7 +24,7 @@ while i <= end:
     
     print(myjson)
     
-    response = requests.post('http://localhost:8000/flight', json=myjson)
+    response = requests.post('http://localhost:8000/flight', json=myjson)   
     print(response.json())
 
     # increase i

@@ -42,7 +42,7 @@ async def post_flight_information(item: Flight):
         print(json_as_string)
         
         # Produce the string
-        #produce_kafka_string(json_as_string)
+        produce_kafka_string(json_as_string)
 
         # Encode the created customer item if successful into a JSON and return it to the client with 201
         return JSONResponse(content=json_of_item, status_code=201)
@@ -52,7 +52,7 @@ async def post_flight_information(item: Flight):
     
 def produce_kafka_string(json_as_string):
     # Create producer
-        producer = KafkaProducer(bootstrap_servers='kafka:9092',acks=1)
+        producer = KafkaProducer(bootstrap_servers='localhost:9093',acks=1)
         
         # Write the string as bytes because Kafka needs it this way
         producer.send('ingestion-topic', bytes(json_as_string, 'utf-8'))

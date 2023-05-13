@@ -1,4 +1,5 @@
 	./kafka-topics.sh --list --bootstrap-server localhost:9092
+./kafka-topics.sh --list --bootstrap-server localhost:9092
 
 
 delete a topic in kafka
