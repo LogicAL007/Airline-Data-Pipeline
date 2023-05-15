@@ -8,7 +8,7 @@ services:
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
 
   kafka:
     image: 'bitnami/kafka:latest'
@@ -25,7 +25,7 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
   spark:
     image: 'jupyter/pyspark-notebook:spark-2'
     ports:
@@ -34,14 +34,14 @@ services:
     volumes:
       - ./ApacheSpark/:/home
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
 
   api-feed:
-    image: 'api-ingest'
+    image: 'api-feed'
     ports:
-       - '9000:9000'
+       - '80:80'
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
   mongo:
     container_name: mongo-dev
     image: mongo
@@ -55,7 +55,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: auth
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
 
   mongo-express:
     image: mongo-express
@@ -69,7 +69,7 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: root
       ME_CONFIG_BASICAUTH_PASSWORD: example
     networks:
-      - mydocumentstreaming_default
+      - airline-data-pipeline_default
     depends_on:
       - mongo
 
