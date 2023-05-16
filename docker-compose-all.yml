@@ -13,7 +13,7 @@ services:
   kafka:
     image: 'bitnami/kafka:latest'
     ports:
-      - '9093:9093' 
+      - '9093:9093'          #change to 9093 to access external from your windows host
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
@@ -26,13 +26,14 @@ services:
       - zookeeper
     networks:
       - airline-data-pipeline_default
+
   spark:
     image: 'jupyter/pyspark-notebook:spark-2'
     ports:
       - '8888:8888'
       - "4040-4080:4040-4080"
     volumes:
-      - ./ApacheSpark/:/home
+      - ./ApacheSpark/:/home/jovyan/work
     networks:
       - airline-data-pipeline_default
 
@@ -42,11 +43,12 @@ services:
        - '80:80'
     networks:
       - airline-data-pipeline_default
+
   mongo:
-    container_name: mongo-dev
+    container_name: mongo-dev-flight
     image: mongo
     volumes:
-      - ~/dockerdata/mongonewdb:/data/db    
+      - ~/dockerdata/mongodb:/data/db    
     restart: on-failure
     ports:
       - "27017:27017"
@@ -59,15 +61,15 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: always
+    restart: on-failure
     ports:
       - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo-dev
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_BASICAUTH_USERNAME: root
-      ME_CONFIG_BASICAUTH_PASSWORD: example
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: tribes
     networks:
       - airline-data-pipeline_default
     depends_on:
@@ -75,6 +77,8 @@ services:
 
 
 
+
 networks:
-  mydocumentstreaming_default:
+  airline-data-pipeline_default:
     driver: bridge
+  
