@@ -33,7 +33,7 @@ services:
       - '8888:8888'
       - "4040-4080:4040-4080"
     volumes:
-      - ./ApacheSpark/:/home/jovyan/work
+      - ./ApacheSpark/:/home/sparkfile/work
     networks:
       - airline-data-pipeline_default
 
