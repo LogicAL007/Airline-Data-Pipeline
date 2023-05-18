@@ -55,3 +55,23 @@ if destination_city:
 dat = pd.DataFrame(list(mycol.find()))
 
 # Create line chart using Plost and Streamlit
+
+
+flight = st.sidebar.text_input("Search for you flight here:")
+
+
+# if enter has been used on the input field 
+if flight:
+    
+    myquery = {"flight details": flight}
+    mydoc = mycol.find( myquery, { "days_left":0,"SerialNo":0, "stops":0, "duration": 0, "departure_time":0})
+
+    # create the dataframe
+    df = DataFrame(mydoc)
+
+    # reindex it so that the columns are order lexicographically 
+    reindexed = df.reindex(sorted(df.columns), axis=1)
+
+    # Add the table with a headline
+    st.header("Output by Destination City")
+    table2 = st.dataframe(data=reindexed) 
